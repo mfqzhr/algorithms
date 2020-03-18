@@ -1,4 +1,3 @@
-import jdk.internal.dynalink.beans.StaticClass;
 
 import java.util.Scanner;
 import java.util.Stack;

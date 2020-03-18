@@ -19,8 +19,8 @@ class TreeNode {
  * @date 2019-9-8 11:39:36
  */
 public class Solution {
-    List<List<Integer>> res = new ArrayList<>();
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    List<ArrayList<Object>> res = new ArrayList<>();
+    public List<ArrayList<Object>> levelOrder(TreeNode root) {
         DFS(root, 0);
         return res;
     }
