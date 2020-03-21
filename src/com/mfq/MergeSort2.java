@@ -1,53 +1,54 @@
 package com.mfq;
 
+
+import com.mfq.array.Array;
+import com.mfq.leetcode.code151.Solution;
+
+import java.util.Arrays;
+
 /**
  * @author 穆繁强
  * @date 2019/10/26
  */
 public class MergeSort2 {
+    private int[] auk;
 
-    public static void main(String[] args) {
-        int[] arr = new int[]{2,4,1};
-        mergeSort(arr);
-        for (int i = 0; i < arr.length; i++) {
-            System.out.println(arr[i]);
-        }
+    public void mergeSort(int arr[], int lo, int hi) {
+        auk = new int[arr.length];
+        mergeSort0(arr, lo, hi);
     }
 
-
-    public static void mergeSort(int[] arr) {
-        mySort(arr, 0, arr.length - 1);
-    }
-
-    private static void mySort(int[] arr, int lo, int hi) {
-        if (hi <= lo) {
+    private void mergeSort0(int[] arr, int lo, int hi) {
+        if (lo >= hi) {
             return;
         }
-        int mid = lo + (hi - lo) >> 1;
-        mySort(arr, lo, mid);
-        mySort(arr, mid + 1, hi);
-        myMerge(arr, lo, mid, hi);
+        int mid = lo + (hi - lo) / 2;
+        mergeSort0(arr, lo, mid);
+        mergeSort0(arr, mid + 1, hi);
+        merge(arr, lo, mid, hi);
     }
 
-    private static void myMerge(int[] arr, int lo, int mid, int hi) {
-        int[] cp = new int[arr.length];
-        int i = lo;
-        int j = mid + 1;
-        for (int k = lo; k <= hi ; k++) {
-            cp[k] = arr[k];
+    private void merge(int[] arr, int lo, int mid, int hi) {
+        int i = lo, j = mid + 1;
+        for (int k = lo; k <= hi; k++) {
+            auk[k] = arr[k];
         }
-
-        for (int k = 0; k <= hi ; k++) {
+        for (int k = lo; k <= hi; k++) {
             if (i > mid) {
-                arr[k] = cp[j++];
+                arr[k] = auk[j++];
             } else if (j > hi) {
-                arr[k] = cp[i++];
-            } else if (arr[j] < arr[i]) {
-                arr[k] = cp[j++];
+                arr[k] = auk[i++];
+            } else if (auk[i] > auk[j]) {
+                arr[k] = auk[j++];
             } else {
-                arr[k] = cp[i++];
+                arr[k] = auk[i++];
             }
         }
+    }
 
+    public static void main(String[] args) {
+        int[] a = {5, 2, 3, 5, 1, 7, 123, 1, 34};
+        new MergeSort2().mergeSort(a, 0, a.length - 1);
+        System.out.println(Arrays.toString(a));
     }
 }

@@ -1,5 +1,7 @@
 package com.mfq;
 
+import java.util.Arrays;
+
 public class MergeSort {
 
     private static int[] aux;
@@ -11,23 +13,17 @@ public class MergeSort {
         for (int k = lo; k <= hi; k++) {
             aux[k] = a[k];
         }
-        for (int k = lo; k <= hi; k++) {
-            if (i > mid) {
-                a[k] = aux[j++];
-            } else if (j > hi) {
-                a[k] = aux[i++];
-            } else if (aux[j] < aux[i]) {
-                a[k] = aux[j++];
-            } else {
-                a[k] = aux[i++];
-            }
-
+        int k = lo;
+        while (i <= mid && j <= hi) {
+            a[k++] = aux[i] < aux[j] ? aux[i++] : aux[j++];
+        }
+        while (i <= mid) {
+            a[k++] = aux[i++];
+        }
+        while (j <= hi) {
+            a[k++] = aux[j++];
         }
 
-        for (int k = 0; k < a.length; k++) {
-            System.out.print(a[k] + " ");
-        }
-        System.out.println();
     }
 
     public static void sort(int[] a) {
@@ -48,8 +44,9 @@ public class MergeSort {
 
 
     public static void main(String[] args) {
-        int[] a = {5,2,3,5,1,7,123,34};
+        int[] a = {5, 2, 3, 5, 1, 7, 123, 34};
         MergeSort.sort(a);
+        System.out.println(Arrays.toString(a));
 /*        for (int i = 0; i < a.length; i++) {
             System.out.print(a[i] + " ");
         }*/
