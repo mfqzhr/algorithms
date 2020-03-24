@@ -1,9 +1,8 @@
-package com.mfq.tree;
+package com.mfq.leetcode.code958;
 
-import java.rmi.server.SkeletonNotFoundException;
-import java.util.ArrayList;
+
 import java.util.LinkedList;
-import java.util.List;
+import java.util.Queue;
 
 class TreeNode {
     int val;
@@ -15,36 +14,32 @@ class TreeNode {
     }
 }
 
-
-/**
- * @author mufanqiang
- * @date 2019-9-8 11:12:59
- * @description
- */
 public class Solution {
-    public int maxDepth(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
+    public boolean isCompleteTree(TreeNode root) {
         LinkedList<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        int height = 0, level = 1;
+        boolean leaf = false;
         while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
-            level--;
+            if (leaf && !isLeaf(node)) {
+                return false;
+            }
             if (node.left != null) {
                 queue.offer(node.left);
+            } else if (node.right != null) {
+                return false;
             }
             if (node.right != null) {
                 queue.offer(node.right);
-            }
-            if (level == 0) {
-                level = queue.size();
-                height++;
+            } else {
+                leaf = true;
             }
         }
-        return height;
+
+        return true;
     }
 
-
+    private boolean isLeaf(TreeNode node) {
+        return node.right == null && node.left == null;
+    }
 }
