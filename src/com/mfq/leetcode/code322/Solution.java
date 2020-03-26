@@ -102,13 +102,13 @@ public class Solution {
         for (int i = 1; i <= amount; i++) {
             int min = Integer.MAX_VALUE;
             for (int j = 0; j < coins.length; j++) {
-                if (i >= coins[j] && dp[i - coins[j]] < min) {
+                if (i - coins[j] >= 0 && dp[i - coins[j]] < min) {
                     min = dp[i - coins[j]] + 1;
                 }
             }
             dp[i] = min;
         }
-        return dp[amount];
+        return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
     }
 
     public static void main(String[] args) {

@@ -23,26 +23,21 @@ class Node {
 
 public class Solution {
     public List<List<Integer>> levelOrder(Node root) {
-        LinkedList<Node> queue = new LinkedList<>();
         List<List<Integer>> lists = new ArrayList<>();
+        if (root == null) {
+            return lists;
+        }
+        LinkedList<Node> queue = new LinkedList();
         queue.offer(root);
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(root.val);
-        lists.add(list);
         while (!queue.isEmpty()) {
-            Node node = queue.poll();
-            list = new ArrayList<>();
-            for (int i = 0; i < node.children.size(); i++) {
-                Node n = node.children.get(i);
-                if (n != null) {
-                    list.add(n.val);
-                    queue.offer(n);
-                }
+            List<Integer> list = new ArrayList<>();
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                Node node = queue.poll();
+                list.add(node.val);
+                queue.addAll(node.children);
             }
-            if (list.size() != 0) {
-                lists.add(list);
-
-            }
+            lists.add(list);
         }
         return lists;
 

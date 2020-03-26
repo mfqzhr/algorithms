@@ -6,8 +6,39 @@ package com.mfq.leetcode.code53;
  * @date 2019/11/4
  */
 public class Solution {
-    public int maxSubArray(int[] nums) {
 
+    /**
+     * 动态规划
+     *
+     * @param nums
+     * @return
+     */
+    public int maxSubArray1(int[] nums) {
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        int[] dp = new int[nums.length];
+        dp[0] = nums[0];
+        int max = dp[0];
+        for (int i = 1; i < dp.length; i++) {
+            if (dp[i - 1] <= 0) {
+                dp[i] = nums[i];
+            } else {
+                dp[i] = dp[i - 1] + nums[i];
+            }
+            System.out.println(dp[i]);
+            max = Math.max(dp[i], max);
+        }
+        return max;
+    }
+
+    /**
+     * 分治
+     *
+     * @param nums
+     * @return
+     */
+    public int maxSubArray(int[] nums) {
         return getMax(nums, 0, nums.length - 1);
     }
 
@@ -53,6 +84,6 @@ public class Solution {
 
     public static void main(String[] args) {
         int[] arr = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
-        System.out.println(new Solution().maxSubArray(arr));
+        System.out.println(new Solution().maxSubArray1(arr));
     }
 }
