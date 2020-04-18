@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * @author mufanqiang
- * @date 2019-9-8 13:53:43
+ * @date 2019-9- 8 13:53:43
  */
 public class Solution {
     public void sortColors(int[] nums) {
