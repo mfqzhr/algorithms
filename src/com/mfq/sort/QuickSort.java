@@ -1,6 +1,6 @@
 package com.mfq.sort;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class QuickSort {
     public void qSort(int[] arr, int lo, int hi) {
@@ -31,7 +31,7 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[]{4, 2, 6, 6, 8, 1, 34, 112, 1, 435, 23434};
+        int[] arr = new int[]{2, 0, 1};
         new QuickSort().qSort(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
