@@ -28,18 +28,20 @@ public class LCS {
     public static int lcs2(char[] n1, char[] n2) {
         if (n1 == null || n1.length == 0) return 0;
         if (n2 == null || n2.length == 0) return 0;
-        int[][] dp = new int[n1.length + 1][n2.length + 1];
+        int[][] dp = new int[2][n2.length + 1];
         for (int i = 1; i <= n1.length; i++) {
+            int cur = i % 2;
+            int pre = (i - 1) % 2;
             for (int j = 1; j <= n2.length; j++) {
                 if (n1[i - 1] == n2[j - 1]) {
-                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                    dp[cur][j] = dp[pre][j - 1] + 1;
                 } else {
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                    dp[cur][j] = Math.max(dp[pre][j], dp[cur][j - 1]);
                 }
             }
 
         }
-        return dp[n1.length][n2.length];
+        return dp[n1.length % 2][n2.length];
     }
 
     /**
