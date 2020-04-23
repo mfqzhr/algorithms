@@ -26,11 +26,11 @@ public class Solution {
         if (headA == null || headB == null) {
             return null;
         }
-        ListNode pa = headA, pb = headB;
-        while (pa != pb) {
-            pa = pa == null ? headB : pa.next;
-            pb = pb == null ? headA : pb.next;
+        ListNode a = headA, b = headB;
+        while (a != b) {
+            a = a == null ? headB : a.next;
+            b = b == null ? headB : b.next;
         }
-        return pa;
+        return a;
     }
 }
