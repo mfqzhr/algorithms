@@ -1,6 +1,6 @@
 package com.mfq.stack;
 
-public interface Stack<T> {
+ interface Stack<T> {
     void push(T e);
     int getSize();
     T pop();
