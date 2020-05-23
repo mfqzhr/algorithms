@@ -1,6 +1,8 @@
 package com.mfq.leetcode.code015;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Solution {
 
@@ -18,13 +20,8 @@ public class Solution {
             int j = i + 1;
             int k = nums.length - 1;
             while (j < k) {
-
                 if (nums[j] + nums[k] == -nums[i]) {
-                    ArrayList<Integer> list = new ArrayList<>();
-                    list.add(nums[i]);
-                    list.add(nums[j]);
-                    list.add(nums[k]);
-                    lists.add(list);
+                    lists.add(Arrays.asList(nums[i], nums[j], nums[k]));
                     j++;
                     k--;
                     while (j < nums.length && nums[j] == nums[j - 1]) {
