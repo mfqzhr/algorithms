@@ -1,8 +1,12 @@
 package com.mfq.array;
 
-import java.util.Queue;
-
 public class Array<T> {
+    public static void main(String[] args) {
+        Array<Integer> array1 = new Array<>();
+        Array<String> array2 = new Array<>();
+        Array<Character> array3 = new Array<>();
+    }
+
     private T[] data;//数据
     private int size;//实际大小
 

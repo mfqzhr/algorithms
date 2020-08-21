@@ -1,71 +1,75 @@
 package com.mfq.leetcode.code052;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Solution {
-    public int maxSubArray2(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
+    public int totalNQueens(int n) {
+        return solveNQueens(n).size();
+    }
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> res = new ArrayList<>();
+        if (n <= 0) {
+            return res;
         }
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = i; j < nums.length; j++) {
-                int sum = 0;
-                for (int k = i; k <= j; k++) {
-                    sum += nums[k];
+        ArrayList<String> list = new ArrayList<>();
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            s.append(".");
+        }
+        dfs(res, 0, list, n);
+
+        return res;
+    }
+
+    private void dfs(List<List<String>> res, int row, ArrayList<String> list, int n) {
+        if (row == n) {
+            res.add(new ArrayList<String>(list));
+            return;
+        }
+        for (int col = 0; col < n; col++) {
+            if (!isValidate(row, col, list, n)) {
+                continue;
+            }
+            char[] cur = new char[n];
+            Arrays.fill(cur, '.');
+            cur[col] = 'Q';
+            list.add(new String(cur));
+            dfs(res, row + 1, list, n);
+            list.remove(list.size() - 1);
+        }
+    }
+
+    private boolean isValidate(int row, int col, List<String> res, int n) {
+        // 所在的列有没有皇后
+        for (int i = 0; i < row; i++) {
+            if (res.get(i).charAt(col) == 'Q') {
+                return false;
+            }
+        }
+        // 左上角
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (i - row == j - col) {
+                    if (res.get(i).charAt(j) == 'Q') {
+                        return false;
+                    }
                 }
-                max = Math.max(sum, max);
+            }
+
+        }
+        // 右上角
+        for (int i = 0; i < row; i++) {
+            for (int j = n - 1; j > col; j--) {
+                if (i - row == col - j) {
+                    if (res.get(i).charAt(j) == 'Q') {
+                        return false;
+                    }
+                }
             }
         }
-
-        return max;
-    }
-
-    public int maxSubArray1(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
-        }
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < nums.length; i++) {
-            int sum = 0;
-            for (int j = i; j < nums.length; j++) {
-                sum += nums[j];
-            }
-            max = Math.max(sum, max);
-        }
-
-        return max;
-    }
-
-    public int maxSubArray(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
-        }
-        return maxSubArray(nums, 0, nums.length - 1);
-    }
-
-    public int maxSubArray(int[] nums, int lo, int hi) {
-        if (lo == hi) {
-            return nums[lo];
-        }
-        int leftMax = Integer.MIN_VALUE;
-        int leftSum = 0;
-        int mid = lo + ((hi - lo) >>> 1) ;
-        for (int i = mid; i >= lo; i--) {
-            leftSum += nums[i];
-            leftMax = Math.max(leftMax, leftSum);
-        }
-        int rightMax = Integer.MIN_VALUE;
-        int rightSum = 0;
-        for (int i = mid + 1; i <= hi; i++) {
-            rightSum += nums[i];
-            rightMax = Math.max(rightMax, rightSum);
-        }
-        int max = leftMax + rightMax;
-        return Math.max(max, Math.max(maxSubArray(nums, lo, mid), maxSubArray(nums, mid + 1, hi)));
-    }
-
-    public static void main(String[] args) {
-        int[] arr = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
-        System.out.println(new Solution().maxSubArray(arr));
+        return true;
     }
 
 

@@ -1,13 +1,19 @@
 package com.mfq.sort;
 
-import java.util.*;
+/**
+ * @author ：穆繁强
+ * @date ：Created in 2020/8/19 15:18
+ * @description：
+ * @modified By：
+ * @version: $
+ */
+public class Quick {
 
-public class QuickSort {
-    public void qSort(int[] arr, int lo, int hi) {
+    public static void qSort(int[] arr, int lo, int hi) {
         if (lo >= hi || arr.length <= 1) {
             return;
         }
-        int i = lo, j = hi, p = arr[(lo + hi) / 2];
+        int i = lo, j = hi, p = arr[(i + j) / 2];
         while (i <= j) {
             while (arr[i] < p) {
                 ++i;
@@ -25,14 +31,7 @@ public class QuickSort {
                 ++i;
             }
         }
-
         qSort(arr, lo, j);
         qSort(arr, i, hi);
-    }
-
-    public static void main(String[] args) {
-        int[] arr = new int[]{2, 0, 1};
-        new QuickSort().qSort(arr, 0, arr.length - 1);
-        System.out.println(Arrays.toString(arr));
     }
 }
