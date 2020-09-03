@@ -8,7 +8,7 @@ package com.mfq.leetcode.code002;
  * @version: $
  */
 class ListNode {
-    int val;
+    public int val;
     ListNode next;
 
     public ListNode(int val) {

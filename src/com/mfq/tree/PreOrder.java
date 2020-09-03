@@ -3,7 +3,7 @@ package com.mfq.tree;
 import netscape.security.UserTarget;
 import sun.awt.AWTAccessor;
 
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @author ：穆繁强
@@ -79,6 +79,53 @@ public class PreOrder {
                 }
             }
         }
+        Stack<Integer> stack = new Stack<>();
+        ArrayList<Integer> li = new ArrayList<>(stack);
+        li.addAll(stack);
         System.out.println();
+    }
+
+    public static List<List<Integer>> pathSum(TreeNode root, int sum) {
+        List<List<Integer>> res = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if(root != null) {
+            stack.push(root);
+            while (!stack.isEmpty()) {
+                root = stack.pop();
+                if (root.right != null) {
+                    stack.push(root.right);
+                }
+                if (root.left != null) {
+                    stack.push(root.left);
+                }
+            }
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(5);
+        TreeNode root1 = new TreeNode(4);
+        TreeNode root2 = new TreeNode(8);
+        root.left = root1;
+        root.right = root2;
+        TreeNode roo3 = new TreeNode(11);
+        TreeNode roo4 = new TreeNode(13);
+        TreeNode roo5 = new TreeNode(4);
+        root1.left = roo3;
+        root2.left = roo4;
+        root2.right = roo5;
+        TreeNode root6 = new TreeNode(7);
+        TreeNode root7 = new TreeNode(2);
+        TreeNode root8 = new TreeNode(5);
+        TreeNode root9 = new TreeNode(1);
+        roo3.left = root6;
+        roo3.right = root7;
+        roo5.left = root8;
+        roo5.right = root9;
+        List<List<Integer>> lists = pathSum(root, 22);
+        for (List<Integer> list : lists) {
+            System.out.println(list.toString());
+        }
     }
 }

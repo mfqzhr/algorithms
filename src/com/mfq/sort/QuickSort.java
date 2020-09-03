@@ -25,12 +25,13 @@ public class QuickSort {
                 ++i;
             }
         }
-
         qSort(arr, lo, j);
         qSort(arr, i, hi);
+
     }
 
     public static void main(String[] args) {
+        System.out.println(Integer.toBinaryString(4));
         int[] arr = new int[]{2, 0, 1};
         new QuickSort().qSort(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
