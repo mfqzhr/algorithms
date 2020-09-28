@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /*
 *
-* 二分查找的两种实现方式
+* 二分查找的两种实现方式你好
 * */
 public class BinarySearch {
     /**
